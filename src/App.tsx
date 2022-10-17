@@ -1,11 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components'
 
-import { RouterContainer as Router } from './shared/Router/Router';
+import { Router } from './shared';
 
 import { GlobalStyles } from './styles/global'
-import { defaultTheme } from './styles/themes/default'
-
+import { defaultTheme } from './styles/themes'
 
 export function App() {
   return (
