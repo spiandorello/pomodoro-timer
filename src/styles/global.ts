@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
   
   :focus {
     outline: 0;
-    box-shadow: 0 0 0 2px ${(props) => props.theme['gray-500']};
+    //box-shadow: 0 0 0 2px ${(props) => props.theme['gray-500']};
   }
     
   body {
@@ -22,6 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 1rem;
+    box-shadow: none;
   }
   
   button {
