@@ -4,8 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import { Presentation } from '../../templates';
 
-import { Home } from '../../pages/Home/Home';
-import { History } from '../../pages/History/History';
+import { Home, History } from '../../pages';
 
 export function Router() {
     return (
