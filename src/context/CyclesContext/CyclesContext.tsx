@@ -1,16 +1,17 @@
 import * as React from 'react';
 
+import { Cycle, cyclesReducers } from '../../reducers/cycles/reducer';
+
+import {
+  addNewCycleAction,
+  interruptCurrentAction,
+  markCurrentCycleAsFinishedAction
+} from '../../reducers/cycles/actions';
+
+
 interface CreateCycleData {
   task: string,
   minutesAmount: number,
-}
-
-interface Cycle {
-  id: string,
-  task: string,
-  minutesAmount: number,
-  statedAt: Date,
-  interruptDate?: Date,
 }
 
 interface CyclesContextType {
@@ -30,9 +31,14 @@ interface CyclesContextProviderType {
 export const CyclesContext = React.createContext({} as CyclesContextType);
 
 export function CyclesContextProvider({ children }: CyclesContextProviderType) {
-  const [cycles, setCycles] = React.useState<Cycle[]>([]);
-  const [activeCycleId, setActiveCycleId] = React.useState<string | null>(null);
+  const [cyclesState, dispatch] = React.useReducer(cyclesReducers, {
+    cycles: [],
+    activeCycleId: null,
+  })
+
   const [amountSecondsPassed, setAmountSecondsPassed] = React.useState<number>(0);
+
+  const { cycles, activeCycleId } = cyclesState;
 
   function createNewCycle(data: CreateCycleData) {
     const { task, minutesAmount } = data;
@@ -44,30 +50,15 @@ export function CyclesContextProvider({ children }: CyclesContextProviderType) {
       statedAt: new Date(),
     };
 
-    setCycles((state) => [...state, cycle]);
-    setActiveCycleId(cycle.id);
+    dispatch(addNewCycleAction(cycle));
   }
 
   function interruptCurrentCycle() {
-    setCycles(cycles.map((cycle) => {
-      if (cycle.id === activeCycleId) {
-        return {...cycle, interruptDate: new Date()}
-      }
-
-      return cycle;
-    }));
-
-    setActiveCycleId(null);
+    dispatch(interruptCurrentAction());
   }
 
   function markCurrentCycleAsFinished() {
-    setCycles(cycles.map((cycle) => {
-      if (cycle.id === activeCycleId) {
-        return {...cycle, finishAt: new Date()};
-      }
-
-      return cycle;
-    }));
+    dispatch(markCurrentCycleAsFinishedAction());
   }
 
   function setSecondsPassed(seconds: number) {
