@@ -1,2 +1,2 @@
-export * from './CyclesContext';
-export { CyclesContextProvider as default } from './CyclesContext';
+export * from './CyclesContext'
+export { CyclesContextProvider as default } from './CyclesContext'

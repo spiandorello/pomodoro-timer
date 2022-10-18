@@ -1,2 +1,2 @@
-export * from './NewCycleForm';
-export { NewCycleForm as default } from './NewCycleForm';
+export * from './NewCycleForm'
+export { NewCycleForm as default } from './NewCycleForm'

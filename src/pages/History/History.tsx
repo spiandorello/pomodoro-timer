@@ -1,15 +1,12 @@
-import {
-  Status,
-  HistoryList,
-  HistoryContainer
-} from './styles';
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
-import {useCreateCycle} from '../../context';
-import {formatDistanceToNow} from 'date-fns';
-import {ptBR} from 'date-fns/locale';
+import { useCreateCycle } from '../../context'
+
+import { Status, HistoryList, HistoryContainer } from './styles'
 
 export function History() {
-  const { cycles } = useCreateCycle();
+  const { cycles } = useCreateCycle()
 
   return (
     <HistoryContainer>
@@ -34,39 +31,35 @@ export function History() {
                 statedAt,
                 interruptDate,
                 finishedAt,
-              } = cycle;
+              } = cycle
 
               return (
                 <tr key={id}>
                   <td>{task}</td>
                   <td>{minutesAmount} minutos</td>
-                  <td>{
-                    formatDistanceToNow(new Date(statedAt), {
+                  <td>
+                    {formatDistanceToNow(new Date(statedAt), {
                       addSuffix: true,
                       locale: ptBR,
-                    })
-                  }</td>
+                    })}
+                  </td>
                   <td>
                     {interruptDate && (
                       <Status variant="red">Interrompido</Status>
                     )}
 
-                    {finishedAt && (
-                      <Status variant="green">Concluído</Status>
-                    )}
+                    {finishedAt && <Status variant="green">Concluído</Status>}
 
-                    {(!finishedAt && !interruptDate) && (
+                    {!finishedAt && !interruptDate && (
                       <Status variant="yellow">Em andamento</Status>
                     )}
-
                   </td>
                 </tr>
-              );
+              )
             })}
           </tbody>
-
         </table>
       </HistoryList>
     </HistoryContainer>
-  );
+  )
 }
