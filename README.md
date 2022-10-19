@@ -1,6 +1,6 @@
 # 🚀 Pomodoro timer
 
-[Pomodoro timer site](https://pomodoro-timer-sp.netlify.app/)
+## WEBSITE: [Pomodoro timer](https://pomodoro-timer-sp.netlify.app/)
 
 ## Introdução
     
