@@ -39,16 +39,13 @@ jobs:
         env:
           NODE_ENV: production
 
-      runs-on: ubuntu-latest
-      steps:
-        - name: Netlify Deploy
-          uses: jsmrcaga/action-netlify-deploy@v1.8.0
-          with:
-            NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-            NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-            NETLIFY_DEPLOY_TO_PROD: true
-            build_directory: 'dist'
-            install_command: npm install
-            build_command: npm run build
-            node_version: 16
-
+      - name: Netlify Deploy
+        uses: jsmrcaga/action-netlify-deploy@v1.8.0
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_DEPLOY_TO_PROD: true
+          build_directory: 'dist'
+          install_command: npm install
+          build_command: npm run build
+          node_version: 16
