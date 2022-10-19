@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies and prepare environment
         run: |
-          npm install --production
+          npm install
       - name: Build
         run: npm run build
         env:
