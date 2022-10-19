@@ -5,12 +5,9 @@ on:
     branches:
       - main
 
-#env:
-#  GH_REGISTRY_USERNAME: ${{ secrets.GH_REGISTRY_USERNAME }}
-#  GH_REGISTRY_PASSWORD: ${{ secrets.GH_REGISTRY_PASSWORD }}
-#  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_PASSWORD }}
-#  CONTEXT: .
-#  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+env:
+  APP_NAME: pomodoro-timer
+  SH8: $(echo ${GITHUB_SHA} | cut -c1-8)
 
 jobs:
   build:
@@ -49,3 +46,4 @@ jobs:
           install_command: npm install
           build_command: npm run build
           node_version: 16
+          deploy_alias: "${{ env.APP_NAME }}-${{ env.SH8 }}"
