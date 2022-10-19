@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GH_REGISTRY_USERNAME: ${{ secrets.GH_REGISTRY_USERNAME }}
+  GH_REGISTRY_PASSWORD: ${{ secrets.GH_REGISTRY_PASSWORD }}
+  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_PASSWORD }}
+  CONTEXT: .
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+jobs:
+  build-stg:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    env:
+      ENVIRONMENT: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Short SHA
+        id: sha
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+          cache: npm
+
+      - uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY }}
+
+      - name: Install dependencies and prepare environment
+        run: |
+          npm install --production
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: production
