@@ -13,10 +13,7 @@ env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
-  build-stg:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    env:
-      ENVIRONMENT: production
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Get Short SHA
