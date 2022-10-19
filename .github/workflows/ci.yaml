@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-env:
+#env:
 #  GH_REGISTRY_USERNAME: ${{ secrets.GH_REGISTRY_USERNAME }}
 #  GH_REGISTRY_PASSWORD: ${{ secrets.GH_REGISTRY_PASSWORD }}
 #  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_PASSWORD }}
@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
           cache: npm
 
       - uses: webfactory/ssh-agent@v0.5.4
