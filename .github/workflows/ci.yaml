@@ -10,7 +10,7 @@ env:
 #  GH_REGISTRY_PASSWORD: ${{ secrets.GH_REGISTRY_PASSWORD }}
 #  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_PASSWORD }}
 #  CONTEXT: .
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+#  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
           node-version: 14.x
           cache: npm
 
-      - uses: webfactory/ssh-agent@v0.2.0
+      - uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY }}
 
