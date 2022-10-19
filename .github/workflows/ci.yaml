@@ -5,6 +5,13 @@ on:
     branches:
       - main
 
+env:
+#  GH_REGISTRY_USERNAME: ${{ secrets.GH_REGISTRY_USERNAME }}
+#  GH_REGISTRY_PASSWORD: ${{ secrets.GH_REGISTRY_PASSWORD }}
+#  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_PASSWORD }}
+#  CONTEXT: .
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
