@@ -5,43 +5,14 @@ on:
     branches:
       - main
 
-#env:
-#  GH_REGISTRY_USERNAME: ${{ secrets.GH_REGISTRY_USERNAME }}
-#  GH_REGISTRY_PASSWORD: ${{ secrets.GH_REGISTRY_PASSWORD }}
-#  GITHUB_TOKEN: ${{ secrets.GH_REGISTRY_PASSWORD }}
-#  CONTEXT: .
-#  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Short SHA
-        id: sha
-        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-          cache: npm
-
-      - uses: webfactory/ssh-agent@v0.5.4
-        with:
-          ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY }}
-
-      - name: Install dependencies and prepare environment
-        run: |
-          npm install
-      - name: Build
-        run: npm run build
-        env:
-          NODE_ENV: production
-
       - name: Netlify Deploy
         uses: jsmrcaga/action-netlify-deploy@v1.8.0
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_DEPLOY_TO_PROD: true
           build_directory: 'dist'

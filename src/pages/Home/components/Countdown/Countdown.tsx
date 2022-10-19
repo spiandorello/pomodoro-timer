@@ -54,6 +54,8 @@ export function Countdown() {
   React.useEffect(() => {
     if (activeCycle) {
       document.title = `${minutesFormatted}:${secondsFormatted}`
+    } else {
+      document.title = `Pomodoro Timer`
     }
   }, [minutesFormatted, secondsFormatted, activeCycle])
 
